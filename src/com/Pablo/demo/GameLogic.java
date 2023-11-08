@@ -8,6 +8,11 @@ public class GameLogic {
 
     public static boolean isRunning;
 
+    // Story elements
+    public static int place = 0, act;
+    public static String[] places = {"Everlasting Mountains", "Haunted Landlines",
+            "Castle of the Evil Emperor", "Throne room"};
+
     public static int readInt(String prompt, int userChoices) {
         int input;
 
@@ -71,8 +76,15 @@ public class GameLogic {
                 nameSet = true;
         }while (!nameSet);
 
+        // Print story intro
+        Story.printIntro();
+
         player = new Player(name);
+
         player.chooseTrait();
+
+        // Print first story act
+        Story.printFirstActIntro();
 
         // Setting isRunning to true, so the game loop can continue
         isRunning = true;
@@ -93,6 +105,7 @@ public class GameLogic {
         System.out.println(player.name + "\tHP: " + player.hp + "/" + player.maxHP);
         printSeperator(20);
         System.out.println("XP: " + player.hp);
+        printSeperator(20);
 
         // Printing the chosen trait
         if (player.numAtkUpgrades > 0) {
@@ -108,7 +121,7 @@ public class GameLogic {
     // Printing the main menu
     public static void printMenu() {
         clearConsole();
-        printHeading("MENU");
+        printHeading(places[place]);
         System.out.println("Choose an action:");
         printSeperator(20);
         System.out.println("(1) Continue your journey");
