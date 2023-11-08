@@ -81,7 +81,41 @@ public class GameLogic {
         gameLoop();
     }
 
-    
+    // Method to continue the journey
+    public static void continueJourney() {
+
+    }
+
+    // Printing out important info about player
+    public static void characterInfo() {
+        clearConsole();
+        printHeading("CHARACTER INFO");
+        System.out.println(player.name + "\tHP: " + player.hp + "/" + player.maxHP);
+        printSeperator(20);
+        System.out.println("XP: " + player.hp);
+
+        // Printing the chosen trait
+        if (player.numAtkUpgrades > 0) {
+            System.out.println("Offensive trait: " + player.atkUpgrades[player.numAtkUpgrades -1]);
+            printSeperator(20);
+        }
+        if (player.numDefUpgrades > 0) {
+            System.out.println("Defensive trait: " + player.defUpgrades[player.numDefUpgrades -1]);
+        }
+        anythingToContinue();
+    }
+
+    // Printing the main menu
+    public static void printMenu() {
+        clearConsole();
+        printHeading("MENU");
+        System.out.println("Choose an action:");
+        printSeperator(20);
+        System.out.println("(1) Continue your journey");
+        System.out.println("(2) Character Info");
+        System.out.println("(3) Exit Game");
+    }
+
 
     // Main game loop
     private static void gameLoop() {
