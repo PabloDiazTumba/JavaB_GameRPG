@@ -6,6 +6,8 @@ public class GameLogic {
 
     static Player player;
 
+    public static boolean isRunning;
+
     public static int readInt(String prompt, int userChoices) {
         int input;
 
@@ -71,5 +73,30 @@ public class GameLogic {
 
         player = new Player(name);
         player.chooseTrait();
+
+        // Setting isRunning to true, so the game loop can continue
+        isRunning = true;
+
+        // start main game loop
+        gameLoop();
     }
+
+    
+
+    // Main game loop
+    private static void gameLoop() {
+        while (isRunning){
+            printMenu();
+            int input = readInt("-> ", 3);
+            if (input == 1)
+                continueJourney();
+            else if (input == 2)
+                characterInfo();
+            else
+                isRunning = false;
+
+        }
+    }
+
+
 }
