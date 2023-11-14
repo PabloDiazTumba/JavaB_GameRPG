@@ -5,6 +5,10 @@ public class Player extends Character{
     public int numAtkUpgrades;
     public int numDefUpgrades;
 
+    // Additional player stats
+    int gold, restsLeft, pots;
+
+
     public String[] atkUpgrades = {"Strength", "Power", "might", "Godlike Strength"};
     public String[] defUpgrades = {"Heavy bones", "Stoneskin", "Scale armor", "Holy aura"};
 
@@ -12,6 +16,10 @@ public class Player extends Character{
         super(name, 100, 0);
         this.numAtkUpgrades = 0;
         this.numDefUpgrades = 0;
+        // Set additional stats
+        this.gold = 5;
+        this.restsLeft = 1;
+        this.pots = 0;
     }
 
     @Override
