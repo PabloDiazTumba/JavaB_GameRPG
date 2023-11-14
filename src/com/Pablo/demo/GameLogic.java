@@ -201,7 +201,24 @@ public class GameLogic {
     public static void shop() {
         clearConsole();
         printHeading("You meet a mysterious stranger. \nHe offers you something:");
-        
+        int price = (int) (Math.random()* (10 + player.pots*3) + 10 + player.pots);
+        System.out.println("- Magic potion: " + price + " gold.");
+        printSeperator(20);
+        // Ask the player to buy one
+        System.out.println("Do you want to buy one?\n (1) Yes!\n(2) No thank you.");
+        int input = readInt("-> ", 2);
+        // Check if player wants to buy
+        if (input == 1) {
+            clearConsole();
+            // Check if player has enough gold
+            if (player.gold >= price) {
+                printHeading("you bought a magical potion for " + price + "gold.");
+                player.pots++;
+                player.gold -= price;
+            }else
+                printHeading("You dont have enough gold to buy this");
+            anythingToContinue();
+        }
     }
 
     // Creating a random battle
