@@ -156,7 +156,7 @@ public class GameLogic {
         int encounter = (int) (Math.random() * encounters.length);
         // Calling the respective methods
         if (encounters[encounter].equals("Battle")) {
-            // Random battle();
+           randomBattle();
         }else if (encounters[encounter].equals("Rest")) {
             // Take rest();
         }else {
@@ -237,7 +237,7 @@ public class GameLogic {
                 anythingToContinue();
                 // Check if player is still alive or dead
                 if (player.hp <= 0) {
-                    player.Died(); // Method to end game
+                    playerDied(); // Method to end game
                     break;
                 } else if (enemy.hp <= 0) {
                     // Print player won
@@ -253,12 +253,27 @@ public class GameLogic {
             }else{
                 // Run away
                 clearConsole();
-                // chance to escape 35%
-                if (Math.random()*10 + 1 <= 3.5){
-                    printHeading("You ran away from the " + enemy.name + "!");
+                // Check tha player is not in final act (Final boss battle)
+                if (act != 4) {
+                    // chance to escape 35%
+                    if (Math.random()*10 + 1 <= 3.5){
+                        printHeading("You ran away from the " + enemy.name + "!");
+                        anythingToContinue();
+                        break;
+                    }else{
+                        printHeading("You didnt manage to escape.");
+                        int dmgTook = enemy.attack();
+                        System.out.println("In your cowardness you took 0 " + dmgTook + " damage!");
+                        anythingToContinue();
+                        // Check if player is alive
+                        if (player.hp <= 0)
+                            playerDied();
+                    }
+                }else {
+                    printHeading("YOU CANNOT ESCAPE THE EVIL EMPEROR!!!");
                     anythingToContinue();
-                    break;
                 }
+
             }
         }
     }
@@ -274,6 +289,14 @@ public class GameLogic {
         System.out.println("(3) Exit Game");
     }
 
+    // Method that gets called when the player is dead
+    public static void playerDied() {
+        clearConsole();
+        printHeading("You died...");
+        printHeading("You earned " + player.xp + " XP on your journey. Try to earn more next time!");
+        System.out.println("Thank you for playing my game. I hope you enjoyed it =)");
+        isRunning = false;
+    }
 
     // Main game loop
     private static void gameLoop() {
