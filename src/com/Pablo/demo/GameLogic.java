@@ -192,6 +192,77 @@ public class GameLogic {
         anythingToContinue();
     }
 
+    // Creating a random battle
+    public static void randomBattle() {
+        clearConsole();
+        printHeading("You encountered and evil minded creature. You'll have to fight it!");
+        anythingToContinue();
+        // Creating new enemy with random name
+        battle(new Enemy(enemies[(int)(Math.random()* enemies.length)], player.xp));
+    }
+
+    // The main battle method
+    public static void battle(Enemy enemy) {
+        // Main battle loop
+        while (true) {
+            clearConsole();
+            printHeading(enemy.name + "\nHP: " + enemy.xp + "/" + enemy.maxHP);
+            printHeading(player.name + "\nHP: " + player.hp + "/" + player.maxHP);
+            System.out.println("Choose and action:");
+            printSeperator(20);
+            System.out.println("(1) Fight\n(2) Use Potion\n(3) Run Away");
+            int input = readInt("-> ", 3);
+            // React accordingly to player input
+            if (input == 1) {
+                // FIGHT, calculate dmg, dmgTook
+                int dmg = player.attack() - enemy.defend();
+                int dmgTook = enemy.attack() - player.defend();
+                // Check that dmg and dmgTook is not negative
+                if (dmgTook < 0) {
+                    // Add some dmg if payer defends well
+                    dmg -= dmgTook/2;
+                    dmgTook = 0;
+                }
+                if (dmg < 0)
+                    dmg = 0;
+                // Deal dmg to both parties
+                player.hp -= dmgTook;
+                enemy.hp -= dmg;
+                // print the info of this battle round
+                clearConsole();
+                printHeading("BATTLE");
+                System.out.println("You dealt " + dmg + " damage to the  " + enemy.name + ".");
+                printSeperator(15);
+                System.out.println("The " + enemy.name + " dealt " + dmgTook + " damage to you.");
+                anythingToContinue();
+                // Check if player is still alive or dead
+                if (player.hp <= 0) {
+                    player.Died(); // Method to end game
+                    break;
+                } else if (enemy.hp <= 0) {
+                    // Print player won
+                    clearConsole();
+                    printHeading("You defeated the " + enemy.name + "!");
+                    player.xp += enemy.xp;
+                    System.out.println("You earned " + enemy.xp + " XP!");
+                    anythingToContinue();
+                    break;
+                }
+            } else if (input == 2) {
+                // Use potion()
+            }else{
+                // Run away
+                clearConsole();
+                // chance to escape 35%
+                if (Math.random()*10 + 1 <= 3.5){
+                    printHeading("You ran away from the " + enemy.name + "!");
+                    anythingToContinue();
+                    break;
+                }
+            }
+        }
+    }
+
     // Printing the main menu
     public static void printMenu() {
         clearConsole();
