@@ -145,7 +145,7 @@ public class GameLogic {
             Story.printFourthActIntro();
             // Fully heal the player
             player.hp = player.maxHP;
-            // Final battle
+            finalBattle();
 
         }
     }
@@ -158,9 +158,9 @@ public class GameLogic {
         if (encounters[encounter].equals("Battle")) {
            randomBattle();
         }else if (encounters[encounter].equals("Rest")) {
-            // Take rest();
+            takeRest();
         }else {
-            // Shop();
+            shop();
         }
     }
 
@@ -217,6 +217,31 @@ public class GameLogic {
                 player.gold -= price;
             }else
                 printHeading("You dont have enough gold to buy this");
+            anythingToContinue();
+        }
+    }
+
+    // Take a rest
+    public static void takeRest() {
+        clearConsole();
+        if (player.restsLeft >= 1) {
+            printHeading("Do you want to take a rest?(" + player.restsLeft + "rest(s) left).");
+            System.out.println("(1) Tes\n(2) No, not now.");
+            int input = readInt("-> ", 2);
+            if (input == 1) {
+                // Player takes a rest
+                clearConsole();
+                if (player.hp < player.maxHP) {
+                    int hpRestored = (int) (Math.random()* (player.xp/4 + 1) + 10);
+                    player.hp += hpRestored;
+                    if (player.hp > player.maxHP)
+                        player.hp = player.maxHP;
+                    System.out.println("You took a rest and restored up to " + hpRestored + "health.");
+                    System.out.println("You're now at " + player.hp + "/" + player.maxHP + " health.");
+                    player.restsLeft--;
+                }
+            }else
+                System.out.println("You're at full health. You dont need to rest now!");
             anythingToContinue();
         }
     }
@@ -348,6 +373,15 @@ public class GameLogic {
         System.out.println("(1) Continue your journey");
         System.out.println("(2) Character Info");
         System.out.println("(3) Exit Game");
+    }
+
+    // The final battle
+    public static void finalBattle() {
+        // Creating the evil emperor and letting player fight him
+        battle(new Enemy("The EVIL EMPEROR", 300));
+        // printing the proper ending act
+        Story.printEnd(player);
+        isRunning = false;
     }
 
     // Method that gets called when the player is dead
