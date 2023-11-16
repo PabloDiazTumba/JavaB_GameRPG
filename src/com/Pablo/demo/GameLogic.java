@@ -407,6 +407,4 @@ public class GameLogic {
 
         }
     }
-
-
 }
