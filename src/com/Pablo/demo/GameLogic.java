@@ -156,7 +156,7 @@ public class GameLogic {
         int encounter = (int) (Math.random() * encounters.length);
         // Calling the respective methods
         if (encounters[encounter].equals("Battle")) {
-           randomBattle();
+            randomBattle();
         }else if (encounters[encounter].equals("Rest")) {
             takeRest();
         }else {
@@ -309,7 +309,7 @@ public class GameLogic {
                     if (goldEarned > 0) {
                         player.gold += goldEarned;
                         System.out.println("You collect " + goldEarned + " gold from the "
-                        + enemy.name + "'s corpse!");
+                                + enemy.name + "'s corpse!");
                     }
                     anythingToContinue();
                     break;

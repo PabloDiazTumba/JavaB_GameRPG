@@ -85,16 +85,16 @@ public class Story {
         System.out.println("STORY LINE HERE");
         GameLogic.anythingToContinue();
     }
-        public static void printFourthActIntro() {
-            GameLogic.clearConsole();
-            GameLogic.printSeperator(30);
-            System.out.println("ACT IV - INTRO");
-            GameLogic.printSeperator(30);
-            System.out.println("STORY LINE HERE");
-            System.out.println("STORY LINE HERE");
-            System.out.println("STORY LINE HERE");
-            System.out.println("STORY LINE HERE");
-            GameLogic.anythingToContinue();
+    public static void printFourthActIntro() {
+        GameLogic.clearConsole();
+        GameLogic.printSeperator(30);
+        System.out.println("ACT IV - INTRO");
+        GameLogic.printSeperator(30);
+        System.out.println("STORY LINE HERE");
+        System.out.println("STORY LINE HERE");
+        System.out.println("STORY LINE HERE");
+        System.out.println("STORY LINE HERE");
+        GameLogic.anythingToContinue();
     }
 
     public static void printEnd(Player player) {
