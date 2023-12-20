@@ -58,7 +58,7 @@ public class PlayerData {
                 System.out.println("Player data saved successfully: " + player);
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception according to your needs
+            e.printStackTrace();
             System.err.println("Failed to save player data to the database.");
         }
     }
