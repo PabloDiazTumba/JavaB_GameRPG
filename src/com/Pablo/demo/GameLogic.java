@@ -73,6 +73,7 @@ public class GameLogic {
             clearConsole();
             printHeading("Enter your name");
             name = scanner.next();
+            player = new Player(name);  // Set the player here
             clearConsole();
             printHeading("your name is " + name + "\nIs that correct?");
             System.out.println("(1) Yes");
@@ -80,7 +81,7 @@ public class GameLogic {
             int input = readInt("-> ", 2);
             if (input == 1)
                 nameSet = true;
-        }while (!nameSet);
+        } while (!nameSet);
 
         // Print story intro
         Story.printIntro();
@@ -406,5 +407,9 @@ public class GameLogic {
                 isRunning = false;
 
         }
+    }
+
+    public static void setPlayer(Player player) {
+        GameLogic.player = player;
     }
 }
