@@ -40,18 +40,22 @@ public class PlayerData {
 
     public static void savePlayer(Player player) {
         try (Connection connection = DBConnection.connect()) {
-            String sql = "UPDATE players SET max_hp = ?, hp = ?, xp = ?, num_atk_upgrades = ?, " +
-                    "num_def_upgrades = ?, gold = ?, rests_left = ?, pots = ? WHERE player_name = ?";
+            String sql = "INSERT INTO players (player_name, max_hp, hp, xp, num_atk_upgrades, " +
+                    "num_def_upgrades, gold, rests_left, pots) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) " +
+                    "ON DUPLICATE KEY UPDATE " +
+                    "max_hp = VALUES(max_hp), hp = VALUES(hp), xp = VALUES(xp), " +
+                    "num_atk_upgrades = VALUES(num_atk_upgrades), num_def_upgrades = VALUES(num_def_upgrades), " +
+                    "gold = VALUES(gold), rests_left = VALUES(rests_left), pots = VALUES(pots)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setInt(1, player.getMaxHP());
-                preparedStatement.setInt(2, player.getHP());
-                preparedStatement.setInt(3, player.getXP());
-                preparedStatement.setInt(4, player.getNumAtkUpgrades());
-                preparedStatement.setInt(5, player.getNumDefUpgrades());
-                preparedStatement.setInt(6, player.getGold());
-                preparedStatement.setInt(7, player.getRestsLeft());
-                preparedStatement.setInt(8, player.getPots());
-                preparedStatement.setString(9, player.getName());
+                preparedStatement.setString(1, player.getName());
+                preparedStatement.setInt(2, player.getMaxHP());
+                preparedStatement.setInt(3, player.getHP());
+                preparedStatement.setInt(4, player.getXP());
+                preparedStatement.setInt(5, player.getNumAtkUpgrades());
+                preparedStatement.setInt(6, player.getNumDefUpgrades());
+                preparedStatement.setInt(7, player.getGold());
+                preparedStatement.setInt(8, player.getRestsLeft());
+                preparedStatement.setInt(9, player.getPots());
 
                 // Execute the update
                 preparedStatement.executeUpdate();

@@ -73,9 +73,16 @@ public class GameLogic {
             clearConsole();
             printHeading("Enter your name");
             name = scanner.next();
-            player = new Player(name);  // Set the player here
+            player = PlayerData.loadPlayer(name); // Load player data from the database
+
+            if (player == null) {
+                // If the player doesn't exist in the database, create a new player
+                player = new Player(name);
+                PlayerData.savePlayer(player); // Save the new player to the database
+            }
+
             clearConsole();
-            printHeading("your name is " + name + "\nIs that correct?");
+            printHeading("Your name is " + name + "\nIs that correct?");
             System.out.println("(1) Yes");
             System.out.println("(2) No, I want to change my name.");
             int input = readInt("-> ", 2);
