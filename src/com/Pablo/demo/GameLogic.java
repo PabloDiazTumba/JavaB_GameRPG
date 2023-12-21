@@ -73,12 +73,11 @@ public class GameLogic {
             clearConsole();
             printHeading("Enter your name");
             name = scanner.next();
-            player = PlayerData.loadPlayer(name); // Load player data from the database
+            player = PlayerData.loadPlayer(name);
 
             if (player == null) {
-                // If the player doesn't exist in the database, create a new player
                 player = new Player(name);
-                PlayerData.savePlayer(player); // Save the new player to the database
+                PlayerData.savePlayer(player);
             }
 
             clearConsole();
@@ -297,6 +296,9 @@ public class GameLogic {
                 printSeperator(15);
                 System.out.println("The " + enemy.name + " dealt " + dmgTook + " damage to you.");
                 anythingToContinue();
+
+                PlayerData.savePlayer(player);
+
                 // Check if player is still alive or dead
                 if (player.hp <= 0) {
                     playerDied(); // Method to end game
@@ -319,6 +321,9 @@ public class GameLogic {
                         System.out.println("You collect " + goldEarned + " gold from the "
                                 + enemy.name + "'s corpse!");
                     }
+
+                    PlayerData.savePlayer(player);
+
                     anythingToContinue();
                     break;
                 }
@@ -344,9 +349,15 @@ public class GameLogic {
                     printHeading("You don't have any potions or you're at full health.");
                     anythingToContinue();
                 }
+
+                PlayerData.savePlayer(player);
+
             }else{
                 // Run away
                 clearConsole();
+
+                PlayerData.savePlayer(player);
+
                 // Check tha player is not in final act (Final boss battle)
                 if (act != 4) {
                     // chance to escape 35%
