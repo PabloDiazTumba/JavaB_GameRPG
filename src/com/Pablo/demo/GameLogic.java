@@ -63,8 +63,10 @@ public class GameLogic {
         clearConsole();
         printSeperator(40);
         printSeperator(30);
-        System.out.println("Hellooooo");
-        System.out.println("Some other other text here");
+        System.out.println("Welcome, brave adventurer, to the Realm of Legends!");
+        System.out.println("Prepare yourself for an epic journey filled with danger,");
+        System.out.println("magic, and the fate of an entire world resting on your shoulders.");
+        System.out.println("Embark on a quest that will test your courage and decision-making.");
         printSeperator(30);
         printSeperator(40);
         anythingToContinue();
