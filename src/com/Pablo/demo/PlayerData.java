@@ -38,7 +38,7 @@ public class PlayerData {
         return null;
     }
 
-    public static void savePlayer(Player player) {
+    public static void savePlayer(Player player) {sa
         try (Connection connection = DBConnection.connect()) {
             String sql = "INSERT INTO players (player_name, max_hp, hp, xp, num_atk_upgrades, " +
                     "num_def_upgrades, gold, rests_left, pots) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) " +

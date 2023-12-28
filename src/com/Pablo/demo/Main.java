@@ -18,7 +18,7 @@ public class Main {
 
     private static boolean testDatabaseConnection() {
         try {
-            DBConnection.connect(); // Ensure your Database class has a static connect() method
+            DBConnection.connect();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
